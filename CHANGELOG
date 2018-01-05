@@ -1,0 +1,7 @@
+0.1.0 - January 07, 2018
+========================
+
+Supported tests:
+
+* py35-postgres
+* py36-postgres

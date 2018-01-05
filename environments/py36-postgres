@@ -1,0 +1,37 @@
+FROM ubuntu:16.04
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+RUN apt-get update && \
+    apt-get install -y tzdata software-properties-common locales --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/* && \
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+RUN add-apt-repository ppa:deadsnakes/ppa -y && \
+    apt-get update
+RUN apt-get upgrade -y --no-install-recommends
+RUN apt-get install -y --no-install-recommends \
+    curl \
+    enchant \
+    gcc \
+    git \
+    libbz2-dev \
+    libffi-dev \
+    libjpeg-dev \
+    libmemcached-dev \
+    ntp \
+    #python-dev \
+    #python-setuptools \
+    python3-dev \
+    python3-gdal \
+    python3-pip \
+    python3-setuptools \
+    python3.6 \
+    python3.6-dev \
+    tox \
+    zlib1g-dev
+RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get autoremove -y && \
+    apt-get autoclean -y
+RUN useradd django -m
+ENV PYTHONDONTWRITEBYTECODE 1
+USER django
