@@ -11,7 +11,7 @@ node {
     docker.withRegistry("${registry_url}") {
         stage "Building"
         echo "Building ${image_name}:${build_version}.."
-        container = docker.build("${maintainer_name}/${image_name}:${build_version}", '.')
+        container = docker.build("${maintainer_name}/${image_name}:${build_version}")
         stage "Pushing docker image to ${registry_url}.."
         container.push()
         currentBuild.result = 'SUCCESS'
