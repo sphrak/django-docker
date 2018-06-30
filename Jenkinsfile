@@ -6,7 +6,9 @@ node {
     stage 'Pulling repository..'
     deleteDir()
     checkout scm
-    def build_version = sh "git describe --tags"
+    //def build_version = sh "git describe --tags"
+
+    def build_version = sh(returnStdout: true, script: "git describe --tags").trim()
 
     stage 'Building ${image_name}..'
     docker.withRegistry("${registry_url}") {
