@@ -4,8 +4,9 @@ node {
     image_name = "django-docker"
 
     stage 'Pulling repository..'
+    deleteDir()
     checkout scm
-    build_version = sh "git describe --tags"
+    def build_version = sh "git describe --tags"
 
     stage 'Building ${image_name}..'
     docker.withRegistry("${registry_url}") {
