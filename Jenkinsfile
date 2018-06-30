@@ -1,11 +1,11 @@
 #!groovy
 node {
     registry_url = "https://index.docker.io/v1/"
-    build_version = sh "git describe --tags"
     image_name = "django-docker"
 
     stage 'Pulling repository..'
     checkout scm
+    build_version = sh "git describe --tags"
 
     stage 'Building ${image_name}..'
     docker.withRegistry("${registry_url}") {
